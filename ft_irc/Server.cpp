@@ -4,7 +4,7 @@ Server* global_server = NULL;
 
 Server::Server(int port, const std::string &password) : password(password){
 
-	static CommandHandler instance;
+    static CommandHandler instance;
     commandHandler = &instance; 
     setupServerSocket(port);
     setPort(port);
@@ -66,7 +66,6 @@ void Server::setupEpoll()
 
 void Server::run()
 {
-
     struct epoll_event events[MAX_EVENTS];
 	while (true) {
     int nfds = epoll_wait(epoll_fd, events, MAX_EVENTS, -1);
@@ -89,7 +88,7 @@ void Server::run()
 
 void Server::handleNewConnection() {
 
- struct sockaddr_in client_address;
+    struct sockaddr_in client_address;
     socklen_t client_addr_len = sizeof(client_address);
     int client_fd = accept(server_fd, (struct sockaddr*)&client_address, &client_addr_len);
     if (client_fd == -1) {
@@ -104,8 +103,7 @@ void Server::handleNewConnection() {
         return;
     }
     else {
-            std::cout << "Socket successfully set to non-blocking mode." << std::endl;
-    }
+            std::cout << "Socket successfully set to non-blocking mode." << std::endl; }
 
     struct epoll_event client_ev;
     client_ev.events = EPOLLIN;
@@ -116,48 +114,50 @@ void Server::handleNewConnection() {
         close(client_fd);
         return;
     }
+
     if (getNumOfClientsServer() == MAX_CLIENTS) {
 
         rejectClient(client_fd, ":server_name 421 client_fd :Too many clients on the server\r\n");
         return ;
-
     }
+
     clientCounterServer('+');
     std::cout << "Number of online clients now: " << getNumOfClientsServer() << "\n";
     std::cout << "New client connected!" << std::endl;
     _clients.insert(std::make_pair(client_fd, Client(client_fd, "")));
-
-
 }
 
 void Server::handlingCommands(const std::string& command, Client* client, Server* server) {
-        std::string currentChannel = client->getCurrentChannel();
-       (void)server;
-        if (getArgument(command,1) == "/tictactoe_start" || command.substr(0, 4) == "/tic" || command.substr(0, 3) == "TIC") {
-            ticTacToeBot.processCommand(command, client);
-            return;
-        }
         
-        if (!command.empty() && command[0] == '/') {
-            commandHandler->processCommand(command, client, this);
-            return ;
-        }
-        else if (getArgument(command, 1) == "PRIVMSG" || getArgument(command, 1) == "TOPIC" || getArgument(command, 1) == "NICK" || getArgument(command, 1) == "USER" ) {
-            
-            commandHandler->upperCaseCommand(command, client, this);
-            return ;
-        }
-        else if (currentChannel.empty()) {
-            return ;
-        }
-        else if (isAdminCommand(getArgument(command, 1))) {
-                commandHandler->adminCommand(command, client, this);
-                return ;
-        }
-        else if (!currentChannel.empty()) {
-                    _channels[currentChannel].broadcastMessage(client->getNickname() + ": " + command, client);
-        }
+    std::string currentChannel = client->getCurrentChannel();
+    (void)server;
+    if (getArgument(command,1) == "/tictactoe_start" || command.substr(0, 4) == "/tic" || command.substr(0, 3) == "TIC") {
+        ticTacToeBot.processCommand(command, client);
+        return;
+    }
+        
+    if (!command.empty() && command[0] == '/') {
+        commandHandler->processCommand(command, client, this);
+        return ;
+    }
 
+    else if (getArgument(command, 1) == "PRIVMSG" || getArgument(command, 1) == "TOPIC" || getArgument(command, 1) == "NICK" || getArgument(command, 1) == "USER" ) {        
+        commandHandler->upperCaseCommand(command, client, this);
+        return ;
+    }
+
+    else if (currentChannel.empty()) {
+        return ;
+    }
+
+    else if (isAdminCommand(getArgument(command, 1))) {
+        commandHandler->adminCommand(command, client, this);
+        return ;
+    }
+
+    else if (!currentChannel.empty()) {
+        _channels[currentChannel].broadcastMessage(client->getNickname() + ": " + command, client);
+    }
 }
 
 bool Server::isValidMessage(const std::string& message) {
@@ -167,8 +167,8 @@ bool Server::isValidMessage(const std::string& message) {
             std::cerr << "Ctrl+C detected in message!" << std::endl;
             return false; 
         }
-}
-    return true;
+    }
+    return (true);
 }
 
 void Server::handleClientData(int client_fd)
@@ -276,7 +276,6 @@ void Server::handleClientData(int client_fd)
 }
 
 Server::~Server() {
-
 	std::cout << "The server is closed" << std::endl;
     _clients.clear();
 	close(server_fd);
@@ -288,9 +287,6 @@ void Server::disconnectClient(int fd) {
     close(fd);
     _clients.erase(fd);
 	clientCounterServer('-');
-
-
-
 }
 
 
@@ -312,18 +308,15 @@ void Server::leaveChannel(const std::string& channelName, Client *client) {
 		std::map<std::string, Channel>::iterator it = _channels.find(channelName);
 		
         if (it != _channels.end()) {
-
 		    if (client != NULL)
                 it->second.removeClient(client);
 			if (it->second.isEmpty()) {
 				_channels.erase(it);
 	            channelCounterf('-');
-
-			}
-		if (client != NULL)
-            client->setCurrentChannel("");
-
-        return ;
+		    }
+		    if (client != NULL)
+                client->setCurrentChannel("");
+            return ;
 		}
         
 }
@@ -347,7 +340,6 @@ void Server::kickCommand(Client* client) {
     		_channels.erase(it);
     	}
 		client->setCurrentChannel("");
-
         }
 }
 
@@ -454,7 +446,6 @@ std::string Server::commandTranslate(const std::string& command) {
     if (cmd == "QUIT") {
         return "/quit " + getArgument(command, 2); }
     
-
     if (getNumOfArgument(command) < 2) {
         return ""; }
     
@@ -587,4 +578,3 @@ void Server::leaveAllChannels(Client* client) {
     }
     std::cout << "Client removed from all channels." << std::endl;
 }
-

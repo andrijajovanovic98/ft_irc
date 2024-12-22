@@ -9,7 +9,6 @@ Channel::Channel(const std::string& name) : channelName(name) {
 	userLimit = 0;
 	currentUsersCount = 0;
 	isTopicRestricted = false;
-	
 	isFirstJoiner = false;
 }
 

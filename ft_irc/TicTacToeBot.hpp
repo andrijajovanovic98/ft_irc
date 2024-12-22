@@ -6,6 +6,7 @@ class Client;
 
 class TicTacToeBot {
 public:
+
     TicTacToeBot();
     ~TicTacToeBot();
     void processCommand(const std::string& command, Client* client);
@@ -15,6 +16,7 @@ public:
     void makeBotMove(const Client* client);
 
 private:
+
     std::vector< std::vector<char> > board;
     std::string currentPlayer;
     std::string playerX;

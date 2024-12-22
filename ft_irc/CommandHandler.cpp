@@ -107,7 +107,6 @@ CommandHandler::CommandHandler()
     commandBook["/tictactoe_board"] = 1;
     commandBook["/tic"] = 1;
     commandBook["/tictactoe"] = 2;
-    
     commandBook["INVITE"] = 3;  
     commandBook["KICK"] = 2;    
     commandBook["JOIN"] = 1;    

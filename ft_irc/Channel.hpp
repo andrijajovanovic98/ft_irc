@@ -18,7 +18,6 @@ private:
 	bool _inviteOnly;
 	std::string _password;
 	std::vector<Client *> AdminOnChannel;
-
 	std::vector<Client*> _invitedClients;
 	int userLimit;
 	int currentUsersCount;
