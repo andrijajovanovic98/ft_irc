@@ -20,9 +20,9 @@ public:
 
 	CommandHandler();
 
-	void processCommand(const std::string& command, Client* client, Server* server);
 	int adminCommand(const std::string& command, Client* client, Server* server);
 	int upperCaseCommand(const std::string& command, Client* client, Server* server);
+	void processCommand(const std::string& command, Client* client, Server* server);
 
 	bool isCommandCorrect(const std::string& command, Client* client);
 	std::string errorMessage(const std::string& command) const;
