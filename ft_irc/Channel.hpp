@@ -30,38 +30,33 @@ public:
 
 	void addClient(Client *client);
 	void addClientsToInvitedList(Client *client);
-	void removeClient(Client *client);
+	void addAdmin(Client* client);
+	
 	void setTopic(const std::string &newTopic);
 	void setTopicRestricted(bool value);
 	void setInviteOnly(bool value);
 	void setPassword(const std::string& password);
-	void setUserLimitation(bool value);
+	void setUserLimit(int limit);
 
 	std::string getChannelname() const;
 	std::string getTopic() const;
-	bool getIsClientAdminOnServer(int clientFd) const;
 	std::string getPassword() const;
+	bool getIsClientAdminOnServer(int clientFd) const;
+	bool getIsTopicRestricted() const;
+	int getCurrentUsersCount() const;
 
 	bool isUserInvited(Client* client) const;
 	bool isInviteOnly() const;
-
-	bool getIsTopicRestricted() const;
-
-	void broadcastMessage(const std::string& message, Client* sender);
-	bool isEmpty() const;
-
-	void addAdmin(Client* client);
-	void removeAdmin(Client* client);
-
 	bool isClientAdminOnServer(Client* client) const;
+	bool isEmpty() const;
+	bool isMember(Client *client);
 
-	//userlimitation
-
-	void setUserLimit(int limit);
+	void removeAdmin(Client* client);
+	void removeClient(Client *client);
     void removeUserLimit();
-	int getCurrentUsersCount() const;
+
 	bool canJoin() const;
 	void clientCounter(char sign);
-	bool isMember(Client *client);
+	void broadcastMessage(const std::string& message, Client* sender);
 
 };
