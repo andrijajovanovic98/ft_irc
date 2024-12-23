@@ -38,7 +38,6 @@ public:
 	void setUserLimitation(bool value);
 
 	std::string getChannelname() const;
-	std::string getClientList() const;
 	std::string getTopic() const;
 	bool getIsClientAdminOnServer(int clientFd) const;
 	std::string getPassword() const;

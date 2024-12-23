@@ -39,18 +39,6 @@ bool Channel::isEmpty() const {
     return _clients.empty();
 }
 
-std::string Channel::getClientList() const {
-    std::ostringstream oss;
-    for (std::vector<Client*>::const_iterator it = _clients.begin(); it != _clients.end(); ++it) {
-        if (it != _clients.begin()) {
-            oss << ", "; 
-        }
-        oss << (*it)->getNickname();
-    }
-    return oss.str();
-}
-
-
 std::string Channel::getTopic() const {
 	return (this->topic);
 }
