@@ -76,7 +76,6 @@ public:
 	bool isAdminCommand(const std::string& command);
 	
 
-	int getPort() const;
 	void setPort(int port);
 	std::string getServerPassword() const;
 	bool isValidMessage(const std::string& message);

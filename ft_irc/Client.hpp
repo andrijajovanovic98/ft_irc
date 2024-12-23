@@ -41,7 +41,6 @@ public:
 
 	void setNickname(const std::string &nickname);
 	void setUsername(const std::string &userName);
-	void setRealName(const std::string &realName);
 	std::string generateUsername(int fd);
 
  	void setCurrentChannel(const std::string &channel);
@@ -51,7 +50,6 @@ public:
 	bool isClientAuthenticated() const;
 	void setClientAuthenticated(bool value);
 
-	void PrintChannels();
 	void AddChannelToList(const std::string& channelName);
 	void broadcastNickChange(const std::string& oldNick, const std::string& newNick, Server* server);
 
@@ -63,7 +61,6 @@ public:
 
 	void appendToBuffer(const std::string& data);
 	std::string getBuffer() const;
-	void eraseFromBuffer(size_t startPos, size_t length);
 	bool hasCompleteCommand() const;
 	std::string extractCommand();
 	void clearBuffer();

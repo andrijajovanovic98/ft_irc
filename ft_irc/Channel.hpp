@@ -60,7 +60,6 @@ public:
 
 	void setUserLimit(int limit);
     void removeUserLimit();
-    int getUserLimit() const;
 	int getCurrentUsersCount() const;
 	bool canJoin() const;
 	void clientCounter(char sign);

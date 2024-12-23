@@ -116,21 +116,3 @@ CommandHandler::CommandHandler()
     commandBook["USER"] = 4;   
     commandBook["QUIT"] = 1;   
 }
-
-void CommandHandler::printCommands() const {
-    
-    for (std::map<std::string, int>::const_iterator it = commandBook.begin(); it != commandBook.end(); ++it) {
-        std::cout << "Command: " << it->first << ", Required Args: " << it->second << std::endl;
-    }
-}
-
-
-bool isAlphaOnly(const std::string& nickName) {
-    for (size_t i = 0; i < nickName.length(); ++i) {
-        if (!std::isalpha(nickName[i])) {
-            if (nickName[i] != '#')
-                return false; 
-        }
-    }
-    return true; 
-}

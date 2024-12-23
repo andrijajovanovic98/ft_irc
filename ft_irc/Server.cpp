@@ -406,11 +406,6 @@ bool Server::isAdminCommand(const std::string& command) {
     return false;
 }
 
-
-int Server::getPort() const {
-    return (this->port);
-}
-
 void Server::setPort(int port) {
     if (port >= 6665 && port <= 6669) {
         this->port = port;

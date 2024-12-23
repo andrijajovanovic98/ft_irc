@@ -109,17 +109,6 @@ std::string Client::getRealName() const {
     return realName;
 }
 
-void Client::setRealName(const std::string &realName) {
-    this->realName = realName;
-}
-
-void Client::PrintChannels() {
-    for (size_t i = 0; i < _onChannels.size(); i++) {
-        std::cout << "Channel[" << i << "]: " 
-                  << (_onChannels[i].empty() ? "lobby" : _onChannels[i]) << std::endl;
-    }
-}
-
 void Client::AddChannelToList(const std::string& channelName) {
     _onChannels.push_back(channelName);
 }
@@ -169,10 +158,6 @@ void Client::appendToBuffer(const std::string& data) {
 
 std::string Client::getBuffer() const {
     return buffer;
-}
-
-void Client::eraseFromBuffer(size_t startPos, size_t length) {
-    buffer.erase(startPos, length);
 }
 
 bool Client::hasCompleteCommand() const {

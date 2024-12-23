@@ -24,7 +24,6 @@ public:
 	int adminCommand(const std::string& command, Client* client, Server* server);
 	int upperCaseCommand(const std::string& command, Client* client, Server* server);
 
-    void printCommands() const;
 	bool isCommandCorrect(const std::string& command, Client* client);
 	std::string errorMessage(const std::string& command) const;
 
@@ -44,5 +43,4 @@ public:
 
 };
 
-bool isAlphaOnly(const std::string& nickName);
 bool isAlphanumeric(const std::string &str);

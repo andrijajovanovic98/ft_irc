@@ -136,10 +136,6 @@ void Channel::removeUserLimit() {
 	userLimit = 0; 
 }
 
-int Channel::getUserLimit() const { 
-	return userLimit;
-}
-
 bool Channel::canJoin() const {
     return userLimit == 0 || getCurrentUsersCount() < userLimit;
 }
