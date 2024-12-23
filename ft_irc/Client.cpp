@@ -66,18 +66,6 @@ bool Client::sendMessage(const std::string&  message) const {
 	return true;
 }
 
-void Client::appendToMessageBuffer(const std::string &data) {
-	messageBuffer.insert(messageBuffer.end(), data.begin(), data.end());
-}
-
-void Client::clearMessageBuffer() {
-	messageBuffer.clear();
-}
-
-std::string Client::getMessageBuffer() const {
-	return std::string(messageBuffer.begin(), messageBuffer.end());
-}
-
 void Client::setCurrentChannel(const std::string &channel) { 
     if (channel != "") {
         currentChannel = channel;
@@ -104,21 +92,6 @@ std::string Client::generateRandomNickname() {
     return oss.str();
 }
 
-void Client::setAdmin() {
-	if (isAdmin == false) {
-		isAdmin = true;
-		send(this->getFd(), BEADMIN, strlen(BEADMIN), 0); 
-	}
-	else
-		send(this->getFd(), "You are already admin...\n", strlen("You are already admin...\n"), 0); 
-}
-
-bool Client::getIsAdmin() {
-
-	return (isAdmin);
-}
-
-
 bool Client::isClientAuthenticated() const {
 	return (this->authenticated);
 }
@@ -138,12 +111,6 @@ std::string Client::getRealName() const {
 
 void Client::setRealName(const std::string &realName) {
     this->realName = realName;
-}
-
-void Client::SetOnChannels(const std::string& channelName, int position) {
-    if (position > 0 && position < 10) {
-        _onChannels[position] = channelName;
-    }
 }
 
 void Client::PrintChannels() {

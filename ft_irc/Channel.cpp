@@ -148,7 +148,6 @@ int Channel::getCurrentUsersCount() const {
 	return (this->currentUsersCount);
 }
 
-
 void Channel::clientCounter(char sign)
 {
 	if (sign == '-')

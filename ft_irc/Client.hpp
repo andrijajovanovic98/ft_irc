@@ -36,7 +36,6 @@ public:
 	std::string getUserName() const;
 	std::string getRealName() const;
 	int getFd() const;
-	bool getIsAdmin();
 	std::string getIpAddress() const;
     int getDccPort() const;
 
@@ -46,17 +45,12 @@ public:
 	std::string generateUsername(int fd);
 
  	void setCurrentChannel(const std::string &channel);
-	void setAdmin();
 
 	bool sendMessage(const std::string& message) const; 
-	void appendToMessageBuffer(const std::string &data);
-	std::string getMessageBuffer() const;
 
-	void clearMessageBuffer();
 	bool isClientAuthenticated() const;
 	void setClientAuthenticated(bool value);
 
-	void SetOnChannels(const std::string& channelName, int position);
 	void PrintChannels();
 	void AddChannelToList(const std::string& channelName);
 	void broadcastNickChange(const std::string& oldNick, const std::string& newNick, Server* server);
