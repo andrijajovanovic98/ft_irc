@@ -160,17 +160,6 @@ void Server::handlingCommands(const std::string& command, Client* client, Server
     }
 }
 
-bool Server::isValidMessage(const std::string& message) {
-    for (size_t i = 0; i < message.size(); ++i) {
-        char c = message[i];
-        if ((int)c == -1) {
-            std::cerr << "Ctrl+C detected in message!" << std::endl;
-            return false; 
-        }
-    }
-    return (true);
-}
-
 void Server::handleClientData(int client_fd)
 {
     char buffer[4096] = {0};
@@ -289,21 +278,6 @@ void Server::disconnectClient(int fd) {
 	clientCounterServer('-');
 }
 
-
-void Server::listChannels(Client* client) {
-    std::string channelList = "Channels available:\n";
-    
-    for (std::map<std::string, Channel>::iterator it = _channels.begin(); it != _channels.end(); ++it) {
-        channelList += "- " + it->first + "\n";
-    }
-
-    if (_channels.empty()) {
-        channelList += "No available channels.\n";
-    }
-
-    client->sendMessage(channelList);
-}
-
 void Server::leaveChannel(const std::string& channelName, Client *client) {
 		std::map<std::string, Channel>::iterator it = _channels.find(channelName);
 		
@@ -319,16 +293,6 @@ void Server::leaveChannel(const std::string& channelName, Client *client) {
             return ;
 		}
         
-}
-
-void Server::listChannelMembers(const std::string& channelName, Client* requester) {
-    std::map<std::string, Channel>::iterator it = _channels.find(channelName);
-    if (it != _channels.end()) {
-        std::string memberList = it->second.getClientList();
-        requester->sendMessage("Members in the channel: " + memberList + "\n");
-    } else {
-        requester->sendMessage("No channel by that name.\n");
-    }
 }
 
 void Server::kickCommand(Client* client) {

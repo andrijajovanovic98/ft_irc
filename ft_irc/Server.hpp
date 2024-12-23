@@ -63,8 +63,6 @@ public:
 
 	int joinChannel(const std::string& command, const std::string& channelName, Client* client);
 	void leaveChannel(const std::string& channelName, Client *client);
-	void listChannels(Client* client);
-	void listChannelMembers(const std::string& channelName, Client* requester);
 
 	void kickCommand(Client* client);
 
@@ -78,7 +76,6 @@ public:
 
 	void setPort(int port);
 	std::string getServerPassword() const;
-	bool isValidMessage(const std::string& message);
 
 	std::string commandTranslate(const std::string& command);
 
