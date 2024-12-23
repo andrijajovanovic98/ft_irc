@@ -26,7 +26,6 @@ int CommandHandler::kickCommand(std::string command, Client* client, Server *ser
         return (1);
     }
     
-
     if (!targetChannel->isClientAdminOnServer(client)) {
 
         std::string noAdminRight = ":" + client->getNickname() + 

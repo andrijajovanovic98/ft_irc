@@ -29,7 +29,6 @@ void    caseInvite(std::string command, Channel * targetChannel,Client *client, 
                                      NULL);
 }
 
-
 void    caseTopicRestriction(Channel * targetChannel,Client *client, bool addingMode) {
 
     targetChannel->setTopicRestricted(addingMode);
@@ -151,8 +150,6 @@ int    caseSetAdminPremission(Server* server,Client *client, std::string command
         return (1);
     }
 
-
-     
     if (modeParameter.empty()) {
                         client->sendMessage("MODE +o/-o requires a parameter (nickname).\n");
                         return (1);

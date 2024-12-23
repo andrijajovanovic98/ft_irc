@@ -22,23 +22,22 @@ int CommandHandler::inviteCommand(const std::string& command, Client* client, Se
     		client->sendMessage(noAdminRight);
         return (1);
     }
-        
-        
-        std::string theInvited = getArgument(command,2);
-        for (std::map<int, Client>::iterator it = server->_clients.begin(); it != server->_clients.end(); ++it) {
-            if (ft_trim(it->second.getNickname()) == theInvited) {
-                std::string theChannel = getArgument(command, 3);
-                if (theChannel == "") {
-                    client->sendMessage("INVITE <clientname> <channelname>\n");    
-                    return (1);
-                }
-                std::string channelName = getArgument(command, 3);
-                Channel* targetChannel = server->getChannelByName(channelName);
-                targetChannel->addClientsToInvitedList(&it->second);
-                it->second.sendMessage("You are invited to join to the channel: " + theChannel + "\n");
-                return (1);
+          
+    std::string theInvited = getArgument(command,2);
+    for (std::map<int, Client>::iterator it = server->_clients.begin(); it != server->_clients.end(); ++it) {
+    if (ft_trim(it->second.getNickname()) == theInvited) {
+        std::string theChannel = getArgument(command, 3);
+        if (theChannel == "") {
+            client->sendMessage("INVITE <clientname> <channelname>\n");    
+            return (1);
         }
+        std::string channelName = getArgument(command, 3);
+        Channel* targetChannel = server->getChannelByName(channelName);
+        targetChannel->addClientsToInvitedList(&it->second);
+        it->second.sendMessage("You are invited to join to the channel: " + theChannel + "\n");
+        return (1);
         }
+    }
     }
 
     std::string error = ":" + client->getNickname() + 

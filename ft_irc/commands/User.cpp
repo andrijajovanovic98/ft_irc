@@ -4,7 +4,6 @@
 int CommandHandler::userCommand(const std::string& command, Client* client, Server* server) {
     (void)server;
 
-
 	std::string currentChannel = client->getCurrentChannel();
     std::string username = getArgument(command, 2);
 

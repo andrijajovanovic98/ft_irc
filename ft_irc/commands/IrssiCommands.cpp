@@ -72,14 +72,14 @@ int Server::irssiAutomaticCommands(Client &client, std::string &message, int &cl
 
 	}
 	if (client.isClientAuthenticated() == false) {
-	if ((getArgument(message, 3) == "PASS" && getArgument(message, 4) == password) ||
-		 (getArgument(message, 1) == "PASS" && getArgument(message, 2) == password)) {
-    	std::string modeMessage = "PASS " + client.getNickname() + " +i\r\n";
-    	send(client_fd, modeMessage.c_str(), modeMessage.size(), 0);
-		client.setClientAuthenticated(true);
-		std::cout << "Authentication successfull: " << client.getNickname() << std::endl;
-    	return (1);
-	}
+		if ((getArgument(message, 3) == "PASS" && getArgument(message, 4) == password) ||
+			(getArgument(message, 1) == "PASS" && getArgument(message, 2) == password)) {
+    		std::string modeMessage = "PASS " + client.getNickname() + " +i\r\n";
+    		send(client_fd, modeMessage.c_str(), modeMessage.size(), 0);
+			client.setClientAuthenticated(true);
+			std::cout << "Authentication successfull: " << client.getNickname() << std::endl;
+    		return (1);
+		}
 	}
     return (0);
 }

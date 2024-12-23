@@ -2,8 +2,6 @@
 
 int channelLimitation(const std::string& command, Client* client, Server *server)
 {
-
-    
     if (server->getChannelByName(getArgument(command,2)) == NULL && client->getCurrentChannel() == "") {
         if (server->getNumOfChannels() == MAX_CHANNELS) {
                 client->sendMessage(":" + std::string(SERVER_NAME) + " 403 " + client->getNickname() +
@@ -55,16 +53,14 @@ int CommandHandler::joinCommand(const std::string& command, Client* client, Serv
 	std::string joinMessage = ":" + client->getNickname() + "!" + client->getUserName() + "@localhost JOIN :" + channelName + "\r\n";
     server->broadcastToChannel(channelName, joinMessage, client);
     return (0);
-    }
+}
 
-    int Server::joinChannel(const std::string& command, const std::string& channelName, Client* client) {
-
+int Server::joinChannel(const std::string& command, const std::string& channelName, Client* client) {
 
     if (_channels.find(channelName) == _channels.end()) {
         _channels.insert(std::make_pair(channelName, Channel(channelName)));
         channelCounterf('+');
     }
-
 
     if (_channels[channelName].isInviteOnly() == true)
     {

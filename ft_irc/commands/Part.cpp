@@ -13,10 +13,8 @@ int CommandHandler::partCommand(const std::string &command, Client* client, Serv
     {
         Channel *targetChannel = server->getChannelByName(channelName);
 	    targetChannel->clientCounter('-');
-
     }
     client->RemoveGetOnChannels(channelName);
-    
     server->broadcastToChannel(channelName, joinMessage, client);
     return (0);
 }
